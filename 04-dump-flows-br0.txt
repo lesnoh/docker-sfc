@@ -1,0 +1,5 @@
+ cookie=0x0, duration=47.299s, table=0, n_packets=4, n_bytes=296, priority=40000,tcp,nw_src=192.168.1.1,tp_dst=80 actions=drop
+ cookie=0x0, duration=2886.771s, table=0, n_packets=9, n_bytes=741, ip,in_port=eth1,nw_src=192.168.1.1,nw_dst=192.168.1.3 actions=output:eth2
+ cookie=0x0, duration=2886.402s, table=0, n_packets=7, n_bytes=1384, ip,in_port=eth2,nw_src=192.168.1.3,nw_dst=192.168.1.1 actions=output:eth1
+ cookie=0x0, duration=2883.701s, table=0, n_packets=4, n_bytes=392, ip,in_port=eth1,nw_src=192.168.1.1,nw_dst=192.168.1.2 actions=output:eth2
+ cookie=0x0, duration=2883.319s, table=0, n_packets=0, n_bytes=0, ip,in_port=eth2,nw_src=192.168.1.2,nw_dst=192.168.1.1 actions=output:eth1
