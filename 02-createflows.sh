@@ -3,7 +3,7 @@
 ip_h1="192.168.1.1/32"
 ip_w1="192.168.1.3/32"
 
-echo "Creating Flows on VM1 Bridge s1"
+echo "Deleting and recreating flows on VM1 Bridge s1"
 
 ovs-ofctl del-flows s1
 ovs-ofctl add-flow s1 in_port=1,ip,nw_src=${ip_h1},nw_dst=${ip_w1},actions=output:2

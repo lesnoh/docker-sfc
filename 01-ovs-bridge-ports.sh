@@ -4,7 +4,7 @@ docker stop Host1 Webserver1 NF1
 ovs-vsctl del-br s1
 ovs-vsctl add-br s1
 
-echo "Restarting Containers"
+echo "Restarting containers"
 docker start Host1 Webserver1 NF1
 sleep 5
 

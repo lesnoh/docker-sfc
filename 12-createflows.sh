@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Creating Flows on VM2 Bridge s2"
+echo "Deleting and recreating flows on VM2 Bridge s2"
 ovs-ofctl del-flows s2
 
 echo "iperf redirect"
