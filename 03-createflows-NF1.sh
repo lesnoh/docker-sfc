@@ -3,7 +3,7 @@
 ip_h1="192.168.1.1/32"
 ip_w1="192.168.1.3/32"
 
-dockercmd="sudo docker exec NF1 "
+dockercmd="docker exec NF1 "
 
 echo "OVS im Container starten"
 $dockercmd service openvswitch-switch start

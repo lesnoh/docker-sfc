@@ -29,12 +29,10 @@ Auf VM2 laufen drei Docker Container:
 
 # Setup
 
-Unter Umständen müssen die Shell-Skripte zunächst für den lokalen Benutzer ausführbar gemacht werden.
+Quellcode herunterladen
 
 	git clone https://github.com/lesnoh/docker-sfc.git
-	git checkout vxlan
 	cd docker-sfc
-	chmod u+x *.sh
 
 
 VMs provisionieren und (neu)starten. Nach einem Neustart müssen die _magic_ Skripte neuausgeführt werden:
@@ -69,28 +67,28 @@ Laufende Container auflisten:
 
 Bash in einem laufenden Container ausführen:
 
-	docker exec -it _containername_ /bin/bash
+	sudo docker exec -it _containername_ /bin/bash
 
 
 ## OVS Dump:
 
-	ovs-ofctl dump-flows s1
+	sudo ovs-ofctl dump-flows s1
 
 # Experiment
 
 ### VM1
-	docker exec -it NF1 tcpdump -i eth1
-	docker exec -it Host1 ping 192.168.1.3
+	sudo docker exec -it NF1 tcpdump -i eth1
+	sudo docker exec -it Host1 ping 192.168.1.3
 
 #### Firewalltest:
 
-	docker exec -it Host1 curl 192.168.1.3
+	sudo docker exec -it Host1 curl 192.168.1.3
 	# Aufruf funktioniert, Firewallregel aktivieren
 	# Zugriff testen und im Anschluss die Matches in der Flowtable anzeigen
 
-	/docker-sfc/04-drop-http.sh
-	docker exec -it Host1 curl 192.168.1.3
-	docker exec -it NF1 ovs-ofctl dump-flows br0
+	sudo /docker-sfc/04-drop-http.sh
+	sudo docker exec -it Host1 curl 192.168.1.3
+	sudo docker exec -it NF1 ovs-ofctl dump-flows br0
 
 
 #### Performancetests ohne Traffic-Shaping
@@ -106,8 +104,8 @@ Bash in einem laufenden Container ausführen:
 Traffic Shaping Versuchsaufbau um den Zugriff von Host1 auf iperf3 mittels NF2 zu begrenzen.
 
 #### Kein Shaping (Host 1 auf VM1) <-> VXLAN <-> (NF2 VM2) <-> (iperf3 VM2)
-VM2: ./13-createflows-NF2-noTrafficShaping.sh\
-VM1:  iperf3 Client auf Container Host1 starten
+VM2: sudo ./13-createflows-NF2-noTrafficShaping.sh\
+VM1: iperf3 Client auf Container Host1 starten
 
 
 
@@ -131,8 +129,8 @@ VM1:  iperf3 Client auf Container Host1 starten
 
 #### Shaping aktivieren (Host 1 auf VM1) <-> VXLAN <-> (NF2 VM2) <-> (iperf3 VM2)
 
-VM2: ./13-createflows-NF2-TrafficShaping.sh\
-VM1:  iperf3 Client auf Container Host1 starten
+VM2: sudo ./13-createflows-NF2-TrafficShaping.sh\
+VM1: iperf3 Client auf Container Host1 starten
 
 	sudo docker exec -it Host1 iperf3 -c 192.168.1.4 -p 5201 -t 2
 	Connecting to host 192.168.1.4, port 5201
